@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -20,15 +20,15 @@ export default function Slider() {
 
   return (
     <>
-      <div className="w-full pt-[44.92%] overflow-hidden relative">
-        <div className="absolute inset-0">
+      <div className="w-full pt-[44.92%] overflow-hidden relative transition duration-500 ease-in-out">
+        <div className="absolute inset-0 transition duration-500 ease-in-out">
           <Swiper
             spaceBetween={16}
             slidesPerView={1.25}
             centeredSlides={true}
-            speed={600}
+            speed={800}
             loop
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full transition duration-500 ease-in-out"
             onSwiper={(swiper) => {
               swiperRef.current = swiper;
             }}
@@ -38,7 +38,7 @@ export default function Slider() {
                 <img
                   src={src}
                   alt={`Slide ${index + 1}`}
-                  className="w-full h-full rounded-[5px] object-cover"
+                  className="w-full h-full rounded-[5px] object-cover transition duration-500 ease-in-out"
                 />
               </SwiperSlide>
             ))}
