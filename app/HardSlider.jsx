@@ -11,21 +11,64 @@ export default function HardSlider() {
   const rawSlides = [
     {
       variations: [
-        { image: "/himage1.png", color: "#b76d68" },
-        { image: "/himage1-1.png", color: "#8e957c" },
+        {
+          image: "/himage1.png",
+          color: "#b76d68",
+          title: "Vanquish",
+          description:
+            "Ushering in a glorious new era of V12 supremacy. Vanquish stands unrivalled at the peak of British mastery.",
+        },
+        {
+          image: "/himage1-1.png",
+          color: "#8e957c",
+          title: "Vanquish Volante",
+          description:
+            "Ushering in a glorious new era of V12 supremacy. Vanquish stands unrivalled at the peak of British mastery.",
+        },
       ],
     },
     {
-      variations: [{ image: "/himage2.png", color: "#047063" }],
+      variations: [
+        {
+          image: "/himage2.png",
+          color: "#047063",
+          title: "Valhalla",
+          description: "Aston Martin’s first-ever mid-engine PHEV supercar.",
+        },
+      ],
     },
     {
-      variations: [{ image: "/himage3.png", color: "#334430" }],
+      variations: [
+        {
+          image: "/himage3.png",
+          color: "#334430",
+          title: "DB12",
+          description:
+            "This is no mere GT. This is the world’s first super tourer.",
+        },
+      ],
     },
     {
-      variations: [{ image: "/himage4.png", color: "#d1d3d4" }],
+      variations: [
+        {
+          image: "/himage4.png",
+          color: "#d1d3d4",
+          title: "DBX S",
+          description:
+            "Marking the return of S. Lighter. Faster. More powerful.",
+        },
+      ],
     },
     {
-      variations: [{ image: "/himage5.png", color: "#505556" }],
+      variations: [
+        {
+          image: "/himage5.png",
+          color: "#505556",
+          title: "Vantage S",
+          description:
+            "More edge. More visceral. More dominant. Vantage S takes its place in an iconic line of high-performing Aston Martin models at the pinnacle of sportcar engagement.",
+        },
+      ],
     },
   ];
 
@@ -144,6 +187,14 @@ export default function HardSlider() {
             </div>
           </div>
         </div>
+        <div className="slider-contentUp">
+          <span className="slider-contentUp-header">
+            {currentVariation.title}
+          </span>
+          <p className="slider-contentUp-text">
+            {currentVariation.description}
+          </p>
+        </div>
         <div className="slider-contentDown">
           <div className="slider-contentDown-buttons">
             <button
@@ -204,8 +255,11 @@ export default function HardSlider() {
               </mhp-ui-icon>
             </button>
           </div>
-
-          <div className="slider-contentDown-options">
+          <div
+            className={`slider-contentDown-options ${
+              rawSlides[activeIndex].variations.length > 1 ? "visible" : ""
+            }`}
+          >
             {rawSlides[activeIndex].variations.length > 1 &&
               rawSlides[activeIndex].variations.map((variation, vIndex) => (
                 <button
@@ -226,6 +280,7 @@ export default function HardSlider() {
                     alt={`Slide`}
                     className="option-button-image"
                   />
+                  <span className="option-button-text">{variation.title}</span>
                 </button>
               ))}
           </div>
