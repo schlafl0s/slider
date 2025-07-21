@@ -36,7 +36,7 @@ export default function HardSlider() {
       variations: [
         {
           image: "/himage2.png",
-          color: "#047063",
+          color: "#069e8dff",
           title: "Valhalla",
           description: "Aston Martin’s first-ever mid-engine PHEV supercar.",
         },
@@ -46,7 +46,7 @@ export default function HardSlider() {
       variations: [
         {
           image: "/himage3.png",
-          color: "#334430",
+          color: "#516c4cff",
           title: "DB12",
           description:
             "This is no mere GT. This is the world’s first super tourer.",
@@ -68,7 +68,7 @@ export default function HardSlider() {
       variations: [
         {
           image: "/himage5.png",
-          color: "#505556",
+          color: "#6d7576ff",
           title: "Vantage S",
           description:
             "More edge. More visceral. More dominant. Vantage S takes its place in an iconic line of high-performing Aston Martin models at the pinnacle of sportcar engagement.",
