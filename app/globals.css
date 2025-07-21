@@ -49,7 +49,7 @@ body {
 }
 
 .swiper-slide {
-  height: 80vh !important;
+  height: 90vh !important;
 }
 
 .swiper-override {
@@ -131,6 +131,7 @@ body {
 .slider-contentDown-buttons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
 }
 
