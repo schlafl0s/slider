@@ -22,6 +22,7 @@ export default function HardSlider() {
           title: "Vanquish",
           description:
             "Ushering in a glorious new era of V12 supremacy. Vanquish stands unrivalled at the peak of British mastery.",
+          video: "/mainVideo1.mp4",
         },
         {
           image: "/himage1-1.png",
@@ -29,6 +30,7 @@ export default function HardSlider() {
           title: "Vanquish Volante",
           description:
             "Ushering in a glorious new era of V12 supremacy. Vanquish stands unrivalled at the peak of British mastery.",
+          video: "/mainVideo2.mp4",
         },
       ],
     },
@@ -39,6 +41,7 @@ export default function HardSlider() {
           color: "#069e8dff",
           title: "Valhalla",
           description: "Aston Martin’s first-ever mid-engine PHEV supercar.",
+          video: "/mainVideo1.mp4",
         },
       ],
     },
@@ -50,6 +53,7 @@ export default function HardSlider() {
           title: "DB12",
           description:
             "This is no mere GT. This is the world’s first super tourer.",
+          video: "/mainVideo2.mp4",
         },
       ],
     },
@@ -61,6 +65,7 @@ export default function HardSlider() {
           title: "DBX S",
           description:
             "Marking the return of S. Lighter. Faster. More powerful.",
+          video: "/mainVideo1.mp4",
         },
       ],
     },
@@ -72,6 +77,7 @@ export default function HardSlider() {
           title: "Vantage S",
           description:
             "More edge. More visceral. More dominant. Vantage S takes its place in an iconic line of high-performing Aston Martin models at the pinnacle of sportcar engagement.",
+          video: "/mainVideo5.mp4",
         },
       ],
     },
@@ -80,6 +86,7 @@ export default function HardSlider() {
   const images = [...rawSlides, ...rawSlides];
 
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [selectedVariations, setSelectedVariations] = useState(
     rawSlides.map(() => 0)
   );
@@ -117,12 +124,86 @@ export default function HardSlider() {
           className="slider-background"
           style={{ backgroundColor: currentVariation.color }}
         >
-          <div className="slider-background-image"></div>
-          <div className="slider-background-image2"></div>
+          <div className="slider-background-video">
+            <video
+              key={currentVariation.video}
+              src={currentVariation.video}
+              autoPlay
+              muted
+              playsInline
+              loop
+              className="slider-video"
+              style={{
+                opacity: isPlaying ? "1" : "0",
+                height: isPlaying ? "77.5%" : "50%",
+                transition: "all 2s ease",
+              }}
+            />
+          </div>
+          <div
+            className="slider-background-image"
+            style={{
+              height: isPlaying ? "77.5%" : "50%",
+              transition: "height 2s ease",
+            }}
+          />
+          <div
+            className="slider-background-image2"
+            style={{
+              height: isPlaying ? "22.5%" : "50%",
+              transition: "height 2s ease",
+            }}
+          />
+          <button
+            className="close-button"
+            onClick={() => setIsPlaying(false)}
+            style={{
+              opacity: isPlaying ? "1" : "0",
+              pointerEvents: isPlaying ? "auto" : "none",
+              transition: "opacity 2s ease",
+            }}
+          >
+            <mhp-ui-icon _ngcontent-ng-c348513252="" _nghost-ng-c1291655634="">
+              <mat-icon
+                _ngcontent-ng-c1291655634=""
+                role="img"
+                class="mat-icon notranslate ui-icon ui-icon--size-medium mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="svg"
+                data-mat-icon-name="close"
+                data-mat-icon-namespace="mhp-ui"
+              >
+                <svg
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fit=""
+                  height="100%"
+                  width="100%"
+                  preserveAspectRatio="xMidYMid meet"
+                  focusable="false"
+                  className="close-button-icon"
+                >
+                  <path d="M31.95 1.96 30.08.09 16.02 14.15 1.95.09.08 1.96l14.06 14.07L.13 30.04 2 31.91 16.02 17.9l14.01 14.01 1.87-1.87-14.01-14.01L31.95 1.96z"></path>
+                </svg>
+              </mat-icon>
+            </mhp-ui-icon>
+          </button>
         </div>
-        <div className="slider-wrapper">
+        <div
+          className="slider-wrapper"
+          style={{
+            height: isPlaying ? "122.5vh" : "100vh",
+            transition: "height 2s ease",
+          }}
+        >
           <div className="aspect-ratio-box">
-            <div className="slider-container">
+            <div
+              className="slider-container"
+              style={{
+                pointerEvents: isPlaying ? "none" : "auto",
+                cursor: isPlaying ? "default" : "",
+              }}
+            >
               <Swiper
                 slidesPerView={1.5}
                 centeredSlides={true}
@@ -163,13 +244,26 @@ export default function HardSlider() {
                   const isActive = realIndex === activeIndex;
 
                   return (
-                    <SwiperSlide key={index} className="slide-full-height">
+                    <SwiperSlide
+                      key={index}
+                      className={`slide-full-height ${
+                        isPlaying ? "playing" : "paused"
+                      }`}
+                    >
                       <img
                         src={variation.image}
                         alt={`Slide ${index + 1}`}
                         className="slide-image"
                       />
-                      <div className="slide-play-button">
+                      <button
+                        className="slide-play-button"
+                        style={{
+                          opacity: isPlaying ? "0" : "1",
+                          pointerEvents: isPlaying ? "none" : "auto",
+                          transition: "opacity 2s ease",
+                        }}
+                        onClick={() => setIsPlaying(true)}
+                      >
                         <mhp-ui-icon>
                           <mat-icon
                             role="img"
@@ -193,9 +287,17 @@ export default function HardSlider() {
                             </svg>
                           </mat-icon>
                         </mhp-ui-icon>
-                      </div>
+                      </button>
                       {isActive && (
-                        <span className="slide-header">{variation.title}</span>
+                        <span
+                          className="slide-header"
+                          style={{
+                            opacity: isPlaying ? "0" : "1",
+                            transition: "all 2s ease",
+                          }}
+                        >
+                          {variation.title}
+                        </span>
                       )}
                     </SwiperSlide>
                   );
@@ -204,7 +306,14 @@ export default function HardSlider() {
             </div>
           </div>
         </div>
-        <div className="slider-contentUp">
+        <div
+          className="slider-contentUp"
+          style={{
+            opacity: isPlaying ? "0" : "1",
+            pointerEvents: isPlaying ? "none" : "auto",
+            transition: "opacity 2s ease",
+          }}
+        >
           <span className="slider-contentUp-header">
             {currentVariation.title}
           </span>
@@ -212,7 +321,14 @@ export default function HardSlider() {
             {currentVariation.description}
           </p>
         </div>
-        <div className="slider-contentDown">
+        <div
+          className="slider-contentDown"
+          style={{
+            opacity: isPlaying ? "0" : "1",
+            pointerEvents: isPlaying ? "none" : "auto",
+            transition: "opacity 2s ease",
+          }}
+        >
           <div className="slider-contentDown-buttons">
             <button
               className="slider-button"
@@ -276,6 +392,9 @@ export default function HardSlider() {
             className={`slider-contentDown-options ${
               rawSlides[activeIndex].variations.length > 1 ? "visible" : ""
             }`}
+            style={{
+              pointerEvents: isPlaying ? "none" : "auto",
+            }}
           >
             {rawSlides[activeIndex].variations.length > 1 &&
               rawSlides[activeIndex].variations.map((variation, vIndex) => (
