@@ -6,6 +6,11 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export default function HardSlider() {
   const rawSlides = [
@@ -78,7 +83,7 @@ export default function HardSlider() {
   const [selectedVariations, setSelectedVariations] = useState(
     rawSlides.map(() => 0)
   );
-
+  const inputRef = useRef(null);
   const swiperRef = useRef(null);
 
   useEffect(() => {
@@ -96,6 +101,14 @@ export default function HardSlider() {
   const currentVariationIndex = selectedVariations[activeIndex];
   const currentVariation =
     rawSlides[activeIndex].variations[currentVariationIndex];
+
+  function hexToRgba(hex, alpha) {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  }
+  const bgColor = hexToRgba(currentVariation.color, 0.25);
 
   return (
     <>
@@ -147,6 +160,7 @@ export default function HardSlider() {
                   const variationIndex = selectedVariations[realIndex];
                   const variation =
                     rawSlides[realIndex].variations[variationIndex];
+                  const isActive = realIndex === activeIndex;
 
                   return (
                     <SwiperSlide key={index} className="slide-full-height">
@@ -180,6 +194,9 @@ export default function HardSlider() {
                           </mat-icon>
                         </mhp-ui-icon>
                       </div>
+                      {isActive && (
+                        <span className="slide-header">{variation.title}</span>
+                      )}
                     </SwiperSlide>
                   );
                 })}
@@ -284,6 +301,144 @@ export default function HardSlider() {
                 </button>
               ))}
           </div>
+        </div>
+        <div
+          className="slider-contentDown-phone"
+          style={{ backgroundColor: bgColor }}
+        >
+          <p className="slider-contentDown-phone-text">
+            {currentVariation.description}
+          </p>
+          {rawSlides[activeIndex].variations.length > 1 && (
+            <div className="slider-contentDown-phone-select">
+              <label className="slider-contentDown-phone-select-text">
+                Select Model
+              </label>
+              <FormControl
+                fullWidth
+                size="small"
+                variant="filled"
+                sx={{
+                  backgroundColor: "transparent",
+                  ".MuiFilledInput-root": {
+                    backgroundColor: "transparent !important", // убираем фон
+                    paddingTop: "0px",
+                    paddingRight: "0px",
+                    color: "#fff",
+                    "&:hover": {
+                      backgroundColor: "transparent !important", // убираем фон при hover
+                    },
+                    "&.Mui-focused": {
+                      backgroundColor: "transparent !important", // убираем фон при фокусе
+                    },
+                    "&:before": {
+                      borderBottom:
+                        "1px solid rgba(255, 255, 255, 0.3) !important",
+                    },
+                    "&:hover:not(.Mui-disabled):before": {
+                      borderBottom:
+                        "1px solid rgba(255, 255, 255, 0.5) !important",
+                    },
+                    "&.Mui-focused:after": {
+                      borderBottom: "2px solid #fff !important",
+                    },
+                    "&:after": {
+                      transition: "none !important",
+                    },
+                    "&.Mui-focused:before": {
+                      borderBottom: "none !important",
+                    },
+                    "&.Mui-disabled:before": {
+                      borderBottomStyle: "dotted",
+                      borderBottomColor: "rgba(255,255,255,0.2)",
+                    },
+                  },
+                  ".MuiInputLabel-root": {
+                    color: "rgba(255, 255, 255, 0.5)",
+                    fontWeight: 500,
+                    "&.Mui-focused": {
+                      color: "#fff",
+                    },
+                  },
+                  ".MuiSelect-icon": {
+                    right: "-5px",
+                    top: "calc(50% - 16px)",
+                    color: "rgba(255, 255, 255, 1)",
+                    fontSize: "30px",
+                  },
+                  ".MuiSelect-iconOpen": {
+                    transform: "none !important",
+                  },
+                  ".MuiSelect-select": {
+                    paddingTop: "8px",
+                    paddingBottom: "8px",
+                    paddingLeft: "0px",
+                    color: "#fff",
+                  },
+                }}
+              >
+                <Select
+                  labelId="model-select-label"
+                  id="model-select"
+                  inputRef={inputRef}
+                  IconComponent={ExpandMoreIcon}
+                  value={selectedVariations[activeIndex]}
+                  onChange={(e) => {
+                    const selected = e.target.value;
+                    setSelectedVariations((prev) => {
+                      const updated = [...prev];
+                      updated[activeIndex] = selected;
+                      return updated;
+                    });
+                  }}
+                  onClose={() => {
+                    setTimeout(() => {
+                      const activeEl = document.activeElement;
+                      if (
+                        activeEl &&
+                        activeEl instanceof HTMLElement &&
+                        activeEl.blur
+                      ) {
+                        activeEl.blur();
+                      }
+                    }, 0);
+                  }}
+                  MenuProps={{
+                    PaperProps: {
+                      sx: {
+                        mt: 1,
+                        bgcolor: "#333",
+                        color: "#fff",
+                        borderRadius: "8px",
+                        boxShadow:
+                          "0px 3px 6px rgba(0,0,0,0.5), 0px 3px 6px rgba(0,0,0,0.7)",
+                        "& .MuiMenuItem-root.Mui-selected": {
+                          bgcolor: "rgba(255, 255, 255, 0.15) !important",
+                          color: "#fff",
+                          "&:hover": {
+                            bgcolor: "rgba(255, 255, 255, 0.25) !important",
+                          },
+                        },
+                        "& .MuiMenuItem-root": {
+                          color: "rgba(255, 255, 255, 1)",
+                          "&:hover": {
+                            bgcolor: "rgba(255, 255, 255, 0.1)",
+                            color: "#fff",
+                          },
+                        },
+                      },
+                    },
+                  }}
+                >
+                  {rawSlides[activeIndex].variations.map((variation, index) => (
+                    <MenuItem key={index} value={index}>
+                      {variation.title}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </div>
+          )}
         </div>
       </div>
     </>

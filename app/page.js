@@ -3,5 +3,5 @@ import Slider from "./Slider";
 import HardSlider from "./HardSlider";
 
 export default function Home() {
-  return <Slider />;
+  return <HardSlider />;
 }
