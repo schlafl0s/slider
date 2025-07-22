@@ -381,7 +381,7 @@ body {
 
 .slider-background-line {
   position: absolute;
-  height: 3px;
+  height: 1px;
   width: 100%;
   z-index: 1;
   filter: brightness(2);

@@ -155,14 +155,14 @@ export default function HardSlider() {
               transition: "all 2s ease",
               backgroundColor: bgColor,
               boxShadow: `
-                  0 0 8px ${bgColor},
                   0 0 16px ${bgColor},
                   0 0 32px ${bgColor},
                   0 0 64px ${bgColor},
-                  0 -2px 60px 0px ${bgColor},
-                  0 2px 60px 40px ${bgColor}
+                  0 0 128px ${bgColor},
+                  0 -2px 60px 80px ${bgColor},
+                  0 2px 60px 60px ${bgColor}
                 `,
-              filter: "brightness(1.8) contrast(1)",
+              filter: "brightness(1.8)",
             }}
           ></div>
           <div
