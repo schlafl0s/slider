@@ -159,8 +159,11 @@ export default function HardSlider() {
                   0 0 32px ${bgColor},
                   0 0 64px ${bgColor},
                   0 0 128px ${bgColor},
-                  0 -2px 60px 100px ${bgColor},
-                  0 -20px 40px 20px ${bgColor},
+                  0 -2px 60px 80px ${bgColor},
+                  0 -10px 40px 20px ${bgColor},
+                  0 -10px 40px 20px ${bgColor},
+                  0 -10px 40px 20px ${bgColor},
+                  0 -10px 40px 20px ${bgColor},
                   0 2px 60px 60px ${bgColor}
                 `,
               filter: "brightness(1.8)",

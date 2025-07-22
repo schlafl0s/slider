@@ -384,7 +384,6 @@ body {
   height: 0px;
   width: 100%;
   z-index: 1;
-  filter: brightness(2);
 }
 
 @media (max-width: 1280px) {
