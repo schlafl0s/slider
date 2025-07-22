@@ -379,6 +379,14 @@ body {
   z-index: 1;
 }
 
+.slider-background-line {
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  z-index: 1;
+  filter: brightness(2);
+}
+
 @media (max-width: 1280px) {
   .slide-full-height {
     padding: 0 50px;

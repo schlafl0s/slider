@@ -148,6 +148,24 @@ export default function HardSlider() {
             }}
           />
           <div
+            className="slider-background-line"
+            style={{
+              opacity: isPlaying ? "1" : "0",
+              top: isPlaying ? "77.5%" : "50%",
+              transition: "all 2s ease",
+              backgroundColor: bgColor,
+              boxShadow: `
+                  0 0 8px ${bgColor},
+                  0 0 16px ${bgColor},
+                  0 0 32px ${bgColor},
+                  0 0 64px ${bgColor},
+                  0 -2px 60px 0px ${bgColor},
+                  0 2px 60px 40px ${bgColor}
+                `,
+              filter: "brightness(1.8) contrast(1)",
+            }}
+          ></div>
+          <div
             className="slider-background-image2"
             style={{
               height: isPlaying ? "22.5%" : "50%",
