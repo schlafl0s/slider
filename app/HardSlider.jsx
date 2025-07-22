@@ -6,11 +6,8 @@ import { Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import { Select, MenuItem, FormControl } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 export default function HardSlider() {
   const rawSlides = [
